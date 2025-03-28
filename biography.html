@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Foundations to Aspirations</title>
+  <style>
+    /* GLOBAL RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* REMOVE BULLETS */
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* BACKGROUND & BASE FONT */
+    body {
+      font-family: "Trebuchet MS", Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-top: 100px; /* space for fixed nav */
+      text-align: center;
+    }
+    #top, h2 {
+      scroll-margin-top: 120px;
+    }
+
+    /* LOGO - same as home page */
+    .logo-img {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: 80px;
+      z-index: 1000;
+      border-radius: 50%;
+      overflow: hidden;
+      background: transparent;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* NAVIGATION (updated) */
+    nav {
+      position: fixed;
+      top: 0;
+      margin-left: 140px; /* space for logo */
+      width: calc(100% - 140px);
+      padding: 0.5rem 5rem;
+      background-color: #86b6f6;
+      border-bottom-left-radius: 40px;
+      box-shadow: 10px 1px 5px rgba(0,0,0,0.5);
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links li a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links li a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    .nav-links li a.active {
+      background-color: #0e11a6;
+      color: #fff;
+      text-decoration: underline;
+    }
+    /* Dropdown for "More" */
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #86b6f6;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-content a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .dropdown-content a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+
+    /* PAGE TITLE & DIVIDER */
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0e11a6;
+      text-shadow: 2px 2px 8px gray;
+      font-family: "EB Garamond", Georgia, "DM Serif", serif;
+      margin-top: 20px;
+    }
+    .divider {
+      height: 3px;
+      background-color: #86b6f6;
+      margin: 20px auto;
+      width: 80%;
+    }
+
+    /* NAVIGATION SECTION (child/adolescence/college) */
+    .navigation-section {
+      margin: 20px 0;
+    }
+    .navigation-section a {
+      display: inline-block;
+      background-color: #0e11a6;
+      color: #fff;
+      padding: 8px 16px;
+      border: 1px solid #0e11a6;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: bold;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+      margin: 0 10px;
+    }
+    .navigation-section a:hover {
+      background-color: #8CB9F8;
+      color: #fff;
+    }
+
+    /* Headings for sections */
+    h2 {
+      font-family: "DM Serif", Georgia, serif;
+      font-weight: bold;
+      color: #0e11a6;
+      text-shadow: 2px 2px 4px gray;
+      margin-top: 40px;
+    }
+
+    /* Thumbnail container for images */
+    .thumbnail-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .thumbnail {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 2px 2px 8px gray;
+      transition: transform 0.3s;
+    }
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
+
+    /* Paragraph block styling */
+    .paragraph-block {
+      background-color: #ede8f5;
+      border-top: 2px solid #86b6f6;
+      border-bottom: 2px solid #86b6f6;
+      border-left: 4px solid #86b6f6;
+      border-right: 4px solid #86b6f6;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 800px;
+      text-align: justify;
+      text-indent: 50px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+    .paragraph-block p {
+      margin-bottom: 0;
+    }
+    .bottom-link {
+      text-align: right;
+      margin-top: 10px;
+    }
+    .go-top {
+      display: inline-block;
+      background-color: #8CB9F8;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: bold;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+    .go-top:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <!-- Circular MD Logo -->
+  <div class="logo-img">
+    <img src="MDlogo.jpg" alt="MD Logo">
+  </div>
+  <!-- Navigation Bar -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="biography.html" class="active">Biography</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li class="dropdown">
+        <a href="#">More ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="mybeats.html">My Beats</a></li>
+          <li><a href="mykindsoffilm.html">My Kind of Film</a></li>
+          <li><a href="mydream.html">Dream Places</a></li>
+          <li><a href="bucketlist.html">Bucket List</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <h1>Foundations to Aspirations</h1>
+  <div class="divider"></div>
+  
+  <!-- Navigation Section -->
+  <div class="navigation-section">
+    <a href="#childhood">Childhood Memories</a>
+    <a href="#adolescence">Adolescent Years</a>
+    <a href="#college">College Experience</a>
+  </div>
+  
+  <!-- Childhood Section -->
+  <h2 id="childhood">Childhood Memories</h2>
+  <div class="thumbnail-container">
+    <a href="child1.jpg">
+      <img src="child1.jpg" alt="Playing outside with friends" class="thumbnail" title="Playing outside with friends">
+    </a>
+    <a href="child2.jpg">
+      <img src="child2.jpg" alt="School achievements" class="thumbnail" title="School achievements">
+    </a>
+    <a href="child3.jpg">
+      <img src="child3.jpg" alt="Family gatherings" class="thumbnail" title="Family gatherings">
+    </a>
+    <a href="child4.jpg">
+      <img src="child4.jpg" alt="Holiday celebrations" class="thumbnail" title="Holiday celebrations">
+    </a>
+  </div>
+  
+  <div class="paragraph-block">
+    <p>
+      My childhood was a fulfilling and joyful time filled with simple yet meaningful experiences.<sub>1</sub> Coming from a middle-class family, I was raised by loving and supportive parents who instilled in me the values of education and perseverance.<sub>2</sub> One of the fondest memories of my childhood was playing outside with my friends, staying out until dusk, and waiting to see whose parents would call them home first.<sub>3</sub> We would run around the neighborhood, play traditional games, and laugh until our stomachs hurt.<sub>4</sub> I was fortunate to grow up in an environment where outdoor play was encouraged, allowing me to develop strong social skills.<sub>5</sub> Academically, I was taught to value and enjoy learning, which helped me become a consistent honor student, earning numerous medals and awards.<sub>6</sub> My parents always emphasized the importance of education, and I took pride in excelling at school.<sub>7</sub> I attended Academia de Bellarmino, where I developed strong connections with my teachers, school staff, and classmates.<sub>8</sub> I was actively involved in school activities, serving as the class president and earning a leadership award for my contributions.<sub>9</sub> I enjoyed organizing events, leading class discussions, and taking responsibility for various tasks.<sub>10</sub> My confidence grew as I interacted with different people and honed my leadership skills.<sub>11</sub> Aside from academics, I also participated in extracurricular activities, including school clubs and competitions.<sub>12</sub> I loved reading books, solving puzzles, and engaging in creative writing.<sub>13</sub> My childhood was filled with warmth, laughter, and achievements that laid the foundation for my future endeavors.<sub>14</sub>
+    </p>
+    <div class="bottom-link">
+      <a href="#top" class="go-top">GO TOP</a>
+    </div>
+  </div>
+  
+  <!-- Adolescent Years Section -->
+  <h2 id="adolescence">Adolescent Years</h2>
+  <div class="thumbnail-container">
+    <a href="teen1.jpg">
+      <img src="teen1.jpg" alt="High school struggles" class="thumbnail" title="High school struggles">
+    </a>
+    <a href="teen2.jpg">
+      <img src="teen2.jpg" alt="Making new friends" class="thumbnail" title="Making new friends">
+    </a>
+    <a href="teen3.jpg">
+      <img src="teen3.jpg" alt="Academic achievements" class="thumbnail" title="Academic achievements">
+    </a>
+    <a href="teen4.jpg">
+      <img src="teen4.jpg" alt="Senior high school experiences" class="thumbnail" title="Senior high school experiences">
+    </a>
+  </div>
+  
+  <div class="paragraph-block">
+    <p>
+      My teenage years were a time of self-discovery and challenges, especially during high school.<sub>1</sub> I initially aspired to enter Quezon City Science High School, but after failing the entrance exam, I was heartbroken, not because I didn’t pass, but because I feared disappointing my parents.<sub>2</sub> My older sister had successfully entered the school and later secured a scholarship at the University of the Philippines, setting a high standard.<sub>3</sub> However, my parents reassured me that trying my best was what truly mattered.<sub>4</sub> Instead, I attended Quezon City Academy, where I experienced a culture shock, as it was my first time transferring schools and adjusting to a larger environment.<sub>5</sub> I struggled with my self-esteem, felt overwhelmed, and initially refrained from participating in extracurricular activities.<sub>6</sub> The transition was difficult, and I often compared myself to my peers, wondering if I was good enough.<sub>7</sub> Despite these challenges, I remained a consistent honor student and ranked among the top in my grade level.<sub>8</sub> Over time, I developed close friendships, though I became more introverted and cautious in trusting new people.<sub>9</sub> I realized the importance of surrounding myself with genuine friends who uplifted and supported me.<sub>10</sub> For senior high school, I enrolled in the University of the East Caloocan under the STEM strand.<sub>11</sub> This phase of my life was more enjoyable, as I gained valuable experiences both inside and outside of school.<sub>12</sub> I formed a solid circle of friends with whom I bonded over meals, studies, and various outings.<sub>13</sub> We helped each other through academic struggles, shared dreams, and celebrated small victories together.<sub>14</sub> Academically, I excelled once again, graduating with honors and high honors.<sub>15</sub> I became more confident in my abilities and embraced my strengths.<sub>16</sub> Senior high school also exposed me to various opportunities that shaped my career aspirations.<sub>17</sub> I participated in group projects and had our research as well.<sub>18</sub> These experiences helped me become more resilient and prepared me for the challenges ahead.<sub>19</sub> Although my teenage years had their ups and downs, they played a significant role in shaping my identity and preparing me for the future.<sub>20</sub>
+    </p>
+    <div class="bottom-link">
+      <a href="#top" class="go-top">GO TOP</a>
+    </div>
+  </div>
+  
+  <!-- College Experience Section -->
+  <h2 id="college">College Experience</h2>
+  <div class="thumbnail-container">
+    <a href="adult1.jpg">
+      <img src="adult1.jpg" alt="First year struggles" class="thumbnail" title="First year struggles">
+    </a>
+    <a href="adult2.jpg">
+      <img src="adult2.jpg" alt="Finding my friend group" class="thumbnail" title="Finding my friend group">
+    </a>
+    <a href="adult3.jpg">
+      <img src="adult3.jpg" alt="Programming journey" class="thumbnail" title="Programming journey">
+    </a>
+    <a href="adult4.jpg">
+      <img src="adult4.jpg" alt="Graduation aspirations" class="thumbnail" title="Graduation aspirations">
+    </a>
+  </div>
+  
+  <div class="paragraph-block">
+    <p>
+      My college experience began with a rocky start.<sub>1</sub> As a late enrollee, I had no prior connections with my classmates and was placed in a free section, which made it difficult to form lasting friendships.<sub>2</sub> Though my classmates were approachable, I didn't develop close bonds during my first semester.<sub>3</sub> I often felt isolated and struggled to adapt to the fast-paced nature of college life.<sub>4</sub> However, things began to improve when I joined a block section during my second semester.<sub>5</sub> It was there that I met a group of friends who remain by my side as I continue my studies.<sub>6</sub> They provided me with the support system I needed, making my college life more enjoyable.<sub>7</sub> Pursuing a Bachelor of Science in Information Technology (BSIT) was initially a challenge, especially since my senior high school education in STEM didn’t include much exposure to ICT or programming.<sub>8</sub> At first, I found programming intimidating and doubted whether I could excel in the field.<sub>9</sub> Despite these fears, I remained determined to succeed.<sub>10</sub> I studied more and focused on improving my coding skills.<sub>11</sub> Over time, I saw improvement, and my grades consistently reflected my efforts.<sub>12</sub> While I may not be the best at everything, I’ve learned to focus on personal growth rather than perfection.<sub>13</sub> College life has taught me the importance of balance, and I prioritize staying motivated while avoiding burnout.<sub>14</sub> Outside of academics, I made time to explore new interests and experiences, expanding my horizons beyond the classroom.<sub>15</sub> These experiences helped me realize my passion for both technology and personal development.<sub>16</sub> My career goals became clearer as I gained more exposure to the tech industry.<sub>17</sub> I participated in group projects and had our research as well.<sub>18</sub> These experiences helped me become more resilient and prepared me for the challenges ahead.<sub>19</sub> Although my college journey is still ongoing, it has provided me with valuable lessons and experiences for the future.<sub>20</sub>
+    </p>
+    <div class="bottom-link">
+      <a href="#top" class="go-top">GO TOP</a>
+    </div>
+  </div>
+  
+</body>
+</html>

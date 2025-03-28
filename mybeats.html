@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>My Beats - Micah Dana Aquino</title>
+  <style>
+    /* GLOBAL RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* BODY & BACKGROUND */
+    body {
+      font-family: "Trebuchet MS", Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+      min-height: 100vh;
+      padding-top: 100px; /* space for fixed nav */
+      text-align: center;
+    }
+    #top {
+      scroll-margin-top: 120px;
+    }
+    
+    /* LOGO - Circular MD Logo */
+    .logo-img {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 1000;
+      background: transparent;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* NAVIGATION BAR */
+    nav {
+      position: fixed;
+      top: 0;
+      margin-left: 140px; /* space for logo */
+      width: calc(100% - 140px);
+      padding: 0.5rem 5rem;
+      background-color: #86b6f6;
+      border-bottom-left-radius: 40px;
+      box-shadow: 10px 1px 5px rgba(0,0,0,0.5);
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links li a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links li a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    .nav-links li a.active {
+      background-color: #0e11a6;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #86b6f6;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-content a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .dropdown-content a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    
+    /* PAGE TITLE & DIVIDER */
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0e11a6;
+      text-shadow: 2px 2px 8px gray;
+      font-family: "EB Garamond", Georgia, "DM Serif", serif;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .divider {
+      height: 3px;
+      background-color: #86b6f6;
+      margin: 20px auto;
+      width: 80%;
+    }
+    
+    /* CONTAINER */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 15px;
+    }
+    
+    /* Category Headings & Descriptions */
+    .category-heading {
+      font-family: "DM Serif", Georgia, serif;
+      font-size: 2rem;
+      font-weight: bold; /* Bold headers */
+      text-decoration: underline;
+      margin-bottom: 10px;
+      color: #0e11a6;
+    }
+    .category-description {
+      font-size: 1rem;
+      margin-top: -5px;
+      margin-bottom: 20px;
+      color: #444;
+    }
+    /* Blue Divider Above POP, now same as primary divider */
+    .blue-divider {
+      height: 3px;
+      background-color: #86b6f6;
+      margin: 20px auto;
+      width: 80%;
+    }
+    
+    /* Audio Clips Section */
+    .audio-clips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .song-card {
+      width: 300px;
+      background-color: #f2f2f5;
+      border-radius: 20px;
+      box-shadow: 0 0 8px rgba(14, 17, 166, 0.3);
+      overflow: hidden;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .song-cover {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 15px;
+      background-color: #ede8f5;
+    }
+    .song-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0e11a6;
+      margin-bottom: 5px;
+    }
+    .song-artist {
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 15px;
+    }
+    .song-card audio {
+      width: 100%;
+      outline: none;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(14, 17, 166, 0.2);
+    }
+    
+    /* Paragraph Block Styling with Justified Text */
+    .paragraph-block {
+      background-color: #ede8f5;
+      border-top: 2px solid #86b6f6;
+      border-bottom: 2px solid #86b6f6;
+      border-left: 4px solid #86b6f6;
+      border-right: 4px solid #86b6f6;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 800px;
+      text-align: justify;
+      text-indent: 50px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+    .paragraph-block p {
+      margin-bottom: 0;
+    }
+    .bottom-link {
+      text-align: right;
+      margin-top: 10px;
+    }
+    .go-top {
+      display: inline-block;
+      background-color: #8CB9F8;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: bold;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+      z-index: 1000;
+    }
+    .go-top:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  
+  <!-- Circular MD Logo -->
+  <div class="logo-img">
+    <img src="MDlogo.jpg" alt="MD Logo">
+  </div>
+  
+  <!-- Navigation Bar -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="biography.html">Biography</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li class="dropdown">
+        <a href="#">More ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="mybeats.html" class="active">My Beats</a></li>
+          <li><a href="mykindsoffilm.html">My Kind of Film</a></li>
+          <li><a href="mydream.html">Dream Places</a></li>
+          <li><a href="bucketlist.html">Bucket List</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <h1>My Beats</h1>
+    <div class="divider"></div>
+    
+    <div class="paragraph-block">
+      <p>
+        Welcome to my beats page! Here I showcase a selection of my favorite tracks spanning original Filipino music (OPM) and popular hits. Enjoy listening to these curated beats that inspire my creative journey!
+      </p>
+    </div>
+    
+    <!-- OPM Category -->
+    <div class="category-heading">OPM</div>
+    <div class="category-description">Original Pinoy Music</div>
+    <div class="audio-clips">
+      <!-- Nobela -->
+      <div class="song-card">
+        <img src="mnobela.jpg" alt="Nobela album art" class="song-cover">
+        <div class="song-title">Nobela</div>
+        <div class="song-artist">Join The Club</div>
+        <audio controls preload="none">
+          <source src="MUSIC/Join The Club - Nobela (Lyrics).mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <!-- Dilaw -->
+      <div class="song-card">
+        <img src="mdilaw.jpg" alt="Dilaw album art" class="song-cover">
+        <div class="song-title">Dilaw</div>
+        <div class="song-artist">Maki</div>
+        <audio controls preload="none">
+          <source src="MUSIC/Maki - Dilaw (Lyrics).mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <!-- Tibok -->
+      <div class="song-card">
+        <img src="mtibok.jpg" alt="Tibok album art" class="song-cover">
+        <div class="song-title">Tibok</div>
+        <div class="song-artist">Earl Agustin</div>
+        <audio controls preload="none">
+          <source src="MUSIC/Tibok  - Earl Agustin (Official Lyric Video).mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    
+    <!-- Blue Divider Above POP Category -->
+    <div class="blue-divider"></div>
+    
+    <!-- POP Category -->
+    <div class="category-heading" style="margin-top: 20px;">POP</div>
+    <div class="category-description" style="margin-top: -10px;">Contemporary Pop Hits</div>
+    <div class="audio-clips">
+      <div class="song-card">
+        <img src="myellow.jpg" alt="Coldplay - Yellow album art" class="song-cover">
+        <div class="song-title">Yellow</div>
+        <div class="song-artist">Coldplay</div>
+        <audio controls preload="none">
+          <source src="MUSIC/@coldplay - Yellow (Lyrics).mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="song-card">
+        <img src="menchanted.jpg" alt="Taylor Swift - Enchanted album art" class="song-cover">
+        <div class="song-title">Enchanted</div>
+        <div class="song-artist">Taylor Swift</div>
+        <audio controls preload="none">
+          <source src="MUSIC/Taylor Swift - Enchanted.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="song-card">
+        <img src="mespresso.jpg" alt="Sabrina Carpenter - Espresso album art" class="song-cover">
+        <div class="song-title">Espresso</div>
+        <div class="song-artist">Sabrina Carpenter</div>
+        <audio controls preload="none">
+          <source src="MUSIC/Sabrina Carpenter - Espresso.mp3" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+    
+    <div class="bottom-link">
+      <a href="#top" class="go-top">Go Top</a>
+    </div>
+  </div>
+</body>
+</html>

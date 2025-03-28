@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Resume</title>
+  <style>
+    /* GLOBAL RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none; /* We'll apply custom bullet styling for lists */
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* BODY & BACKGROUND */
+    body {
+      font-family: "Trebuchet MS", Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-top: 100px; /* space for fixed nav */
+      text-align: center;
+    }
+    #top {
+      scroll-margin-top: 120px;
+    }
+    
+    /* LOGO - Circular MD Logo */
+    .logo-img {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: 80px;
+      z-index: 1000;
+      border-radius: 50%;
+      overflow: hidden;
+      background: transparent;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* NAVIGATION BAR (Updated) */
+    nav {
+      position: fixed;
+      top: 0;
+      margin-left: 140px; /* space for logo */
+      width: calc(100% - 140px);
+      padding: 0.5rem 5rem;
+      background-color: #86b6f6;
+      border-bottom-left-radius: 40px;
+      box-shadow: 10px 1px 5px rgba(0,0,0,0.5);
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links li a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links li a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    .nav-links li a.active {
+      background-color: #0e11a6;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #86b6f6;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-content a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .dropdown-content a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    
+    /* PAGE TITLE & DIVIDER */
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0e11a6;
+      text-shadow: 2px 2px 8px gray;
+      font-family: "EB Garamond", Georgia, "DM Serif", serif;
+      margin-top: 20px;
+    }
+    .divider {
+      height: 3px;
+      background-color: #86b6f6;
+      margin: 20px auto;
+      width: 80%;
+    }
+    
+    /* RESUME CONTAINER */
+    .resume-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+      text-align: left;
+      border: 4px solid #0e11a6;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .top-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .image-container {
+      flex: 0 0 auto;
+    }
+    .image-container img {
+      max-width: 250px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+    /* ID Photo styling (placed as per your placeholder) */
+    .id-photo {
+      max-width: 200px;
+    }
+    
+    /* Bubble styling for resume sections */
+    .bubble {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      position: relative;
+      margin: 0 auto 40px;
+      width: 100%;
+      max-width: 700px;
+      color: #333;
+    }
+    .bubble h2 {
+      background-color: #0e11a6;
+      color: #fff;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 0 10px 10px 0;
+      margin-left: -20px;
+      margin-top: -20px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+    .bubble p, .bubble ul {
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+    .bubble ul {
+      padding-left: 20px;
+      list-style-type: disc; /* Show bullet markers */
+    }
+    .bubble li {
+      margin-bottom: 8px;
+    }
+    
+    /* Go Top Button */
+    .go-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #8CB9F8;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 1em;
+      font-weight: bold;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+      z-index: 1000;
+    }
+    .go-top:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <!-- Circular MD Logo -->
+  <div class="logo-img">
+    <img src="MDlogo.jpg" alt="MD Logo">
+  </div>
+  <!-- Navigation Bar -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="biography.html">Biography</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="resume.html" class="active">Resume</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li class="dropdown">
+        <a href="#">More ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="mybeats.html">My Beats</a></li>
+          <li><a href="mykindsoffilm.html">My Kind of Film</a></li>
+          <li><a href="mydream.html">Dream Places</a></li>
+          <li><a href="bucketlist.html">Bucket List</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <h1>Resume</h1>
+  <div class="divider"></div>
+  
+  <div class="resume-container">
+    <div class="top-row">
+      <!-- Resume Preview Image -->
+      <div class="image-container">
+        <img src="resumeID.jpg" alt="Resume Preview">
+      </div>
+   
+      <div class="bubble">
+        <h2>A. About Me</h2>
+        <p>
+          I am an aspiring IT professional with a strong foundation in programming, technical skills, and 
+          problem-solving. Currently pursuing my Bachelor's degree in Information Technology at the University 
+          of the East - Manila, I am eager to apply my knowledge in a professional setting. My passion lies in 
+          technology, data analytics, and logical problem-solving. I am adaptable, a fast learner, and always 
+          open to new challenges that enhance my skills and experience.
+        </p>
+      </div>
+    </div>
+    
+    <div class="bubble">
+      <h2>B. Technical Skills</h2>
+      <ul>
+        <li>Basic programming in Python, Java, and C#</li>
+        <li>Proficient in Microsoft Word, Excel (including data analysis functions), and PowerPoint</li>
+        <li>Skilled in Canva for designing presentations and visual content</li>
+      </ul>
+    </div>
+    
+    <div class="bubble">
+      <h2>C. Work Experience</h2>
+      <ul>
+        <li>Completed and passed a research capstone project focusing on IT solutions</li>
+        <li>Participated in a work immersion project to gain hands-on experience in the industry</li>
+      </ul>
+    </div>
+    
+    <div class="bubble">
+      <h2>D. Educational Attainment</h2>
+      <ul>
+        <li>Elementary: Academia de Bellarmino (2011-2017)</li>
+        <li>High School: Quezon City Academy (2017-2021)</li>
+        <li>Senior High School: University of the East - Caloocan (2021-2023)</li>
+        <li>College: University of the East - Manila (2023-2025, current)</li>
+      </ul>
+    </div>
+    
+    <div class="bubble">
+      <h2>E. Skills, Training, and Seminars Attended</h2>
+      <ul>
+        <li>SHS research capstone project</li>
+        <li>Seminar on research methodologies</li>
+        <li>Resume-building seminar</li>
+      </ul>
+    </div>
+    
+    <div class="bubble">
+      <h2>F. Hobbies and Interests</h2>
+      <ul>
+        <li>Interested in data analytics, debugging, and logical problem-solving</li>
+        <li>Enjoys learning about emerging technologies in IT</li>
+      </ul>
+    </div>
+  </div>
+  
+  <a href="#top" class="go-top">Go Top</a>
+</body>
+</html>

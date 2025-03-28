@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Kinds of Film</title>
+  <style>
+    /* ===== GLOBAL RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* ===== BODY & BACKGROUND ===== */
+    body {
+      font-family: "Trebuchet MS", Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+      min-height: 100vh;
+      padding-top: 100px; /* space for fixed nav */
+      text-align: center;
+    }
+    #top {
+      scroll-margin-top: 120px;
+    }
+    
+    /* ===== LOGO (circular) ===== */
+    .logo-img {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 1000;
+      background: transparent;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* ===== NAVIGATION (updated) ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      margin-left: 140px; /* space for logo */
+      width: calc(100% - 140px);
+      padding: 0.5rem 5rem;
+      background-color: #86b6f6;
+      border-bottom-left-radius: 40px;
+      box-shadow: 10px 1px 5px rgba(0,0,0,0.5);
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links li a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links li a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    .nav-links li a.active {
+      background-color: #0e11a6;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #86b6f6;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-content a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .dropdown-content a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    
+    /* ===== PAGE TITLE & DIVIDER ===== */
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0e11a6;
+      text-shadow: 2px 2px 8px gray;
+      font-family: "EB Garamond", Georgia, "DM Serif", serif;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .divider {
+      height: 3px;
+      background-color: #86b6f6;
+      margin: 20px auto;
+      width: 80%;
+    }
+    
+    /* ===== WELCOME INTRO ===== */
+    .intro {
+      max-width: 1000px;
+      margin: 0 auto 20px;
+      padding: 0 15px;
+      text-align: justify;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+    
+    /* ===== CATEGORY HEADINGS ===== */
+    .category-heading {
+      font-family: "DM Serif", Georgia, serif;
+      font-size: 2rem;
+      font-weight: bold;
+      text-decoration: underline;
+      margin: 30px 0 10px;
+      color: #0e11a6;
+    }
+    .category-description {
+      font-size: 1rem;
+      margin-top: -5px;
+      margin-bottom: 20px;
+      color: #444;
+    }
+    
+    /* ===== FILM CARDS LAYOUT ===== */
+    .film-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 0 15px;
+    }
+    .film-card {
+      width: 300px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      padding: 20px;
+      text-align: left;
+    }
+    .film-card h2 {
+      font-size: 1.3rem;
+      color: #0e11a6;
+      margin-bottom: 10px;
+    }
+    .film-card p {
+      text-align: justify;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    /* Embedded video element styling */
+    .film-card video {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  
+  <!-- Circular MD Logo -->
+  <div class="logo-img">
+    <img src="MDlogo.jpg" alt="MD Logo">
+  </div>
+  
+  <!-- Navigation Bar -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="biography.html">Biography</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li class="dropdown">
+        <a href="#">More ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="mybeats.html">My Beats</a></li>
+          <li><a href="mykindsoffilm.html" class="active">My Kinds of Film</a></li>
+          <li><a href="mydream.html">Dream Places</a></li>
+          <li><a href="bucketlist.html">Bucket List</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <!-- Page Title and Divider -->
+  <h1>My Kinds of Film</h1>
+  <div class="divider"></div>
+  
+  <!-- Welcome Intro -->
+  <div class="intro">
+    <p>
+      Welcome to my film page! Here I share a selection of films and TV shows that captivate my imagination.
+      From thought-provoking trailers to iconic cinematic masterpieces, explore my curated collection and discover
+      why these films and series resonate with me.
+    </p>
+  </div>
+  
+  <!-- TV SHOWS Category -->
+  <div class="category-heading">TV SHOWS</div>
+  <div class="category-description">Television Series that Inspire</div>
+  <div class="film-container">
+    <!-- Card 1: Incognito -->
+    <div class="film-card">
+      <h2>Incognito</h2>
+      <p>
+        Incognito is a Philippine action drama television series produced by Starr Creatives and Studio Three Sixty.
+        Directed by Lester Pimentel Ong, it stars Richard Gutierrez, Baron Geisler, Maris Racal, and others.
+        It is scheduled to premiere on January 20, 2025.
+      </p>
+      <video controls preload="metadata">
+        <source src="VIDEO/INCOGNITO Trailer.mp4" type="video/mp4">
+       
+      </video>
+    </div>
+    <!-- Card 2: When Life Gives You Tangerines -->
+    <div class="film-card">
+      <h2>When Life Gives You Tangerines</h2>
+      <p>
+        When Life Gives You Tangerines is a South Korean romantic slice-of-life television series written by Lim Sang-choon,
+        directed by Kim Won-seok, and starring IU, Park Bo-gum, Moon So-ri, and Park Hae-joon.
+        It premiered on Netflix on March 7, 2025.
+      </p>
+      <video controls preload="metadata">
+        <source src="VIDEO/When Life Gives You Tangerines  Official Trailer  Netflix.mp4" type="video/mp4">
+       
+      </video>
+    </div>
+  </div>
+  
+  <!-- MOVIES Category -->
+  <div class="category-heading">MOVIES</div>
+  <div class="category-description">Blockbuster Films and Cinematic Masterpieces</div>
+  <div class="film-container">
+    <!-- Card 3: Spider-Man: No Way Home -->
+    <div class="film-card">
+      <h2>Spider-Man: No Way Home</h2>
+      <p>
+        Spider-Man: No Way Home is a 2021 American superhero film featuring Tom Holland as Peter Parker.
+        The film explores the multiverse with returning villains and allies, creating a thrilling crossover event.
+      </p>
+      <video controls preload="metadata">
+        <source src="VIDEO/SPIDER-MAN_ NO WAY HOME - Official Trailer (HD).mp4" type="video/mp4">
+     
+      </video>
+    </div>
+    <!-- Card 4: Avengers: Endgame -->
+    <div class="film-card">
+      <h2>Avengers: Endgame</h2>
+      <p>
+        Avengers: Endgame is a 2019 American superhero film that concludes the Infinity Saga.
+        Directed by the Russo Brothers, it unites the surviving Avengers for one final battle against Thanos.
+      </p>
+      <video controls preload="metadata">
+        <source src="VIDEO/Marvel Studios' Avengers_ Endgame - Official Trailer.mp4" type="video/mp4">
+       
+      </video>
+    </div>
+  </div>
+  
+</body>
+</html>

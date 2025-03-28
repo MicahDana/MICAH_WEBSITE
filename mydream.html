@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Dream Places to Visit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* GLOBAL RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* REMOVE BULLETS */
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Trebuchet MS", Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+    /* LOGO - Updated circular logo */
+    .logo-img {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: 80px;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "DM Serif", Georgia, serif;
+      font-size: 1.5rem;
+      color: #0e11a6;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 1000;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* NAVIGATION - Updated from Gallery page */
+    nav {
+      position: fixed;
+      top: 0;
+      margin-left: 140px;
+      width: calc(100% - 140px);
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: center;
+      background-color: #86b6f6;
+      border-bottom-left-radius: 40px;
+      box-shadow: 10px 1px 5px rgba(0,0,0,0.5);
+      z-index: 900;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+    .nav-links li {
+      position: relative;
+    }
+    .nav-links a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links a:hover,
+    .nav-links a:focus {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    .nav-links a.active,
+    .nav-links a.active:focus {
+      background-color: #0e11a6;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #86b6f6;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-content li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .dropdown-content a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .dropdown-content a:hover,
+    .dropdown-content a:focus {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    /* MAIN CONTENT */
+    .container {
+      padding-top: 100px;
+      text-align: center;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #0e11a6;
+      font-family: "DM Serif", Georgia, serif;
+      margin-bottom: 10px;
+    }
+    /* Divider matching nav color */
+    .divider {
+      width: 80%;
+      height: 3px;
+      background-color: #86b6f6;
+      margin: 0 auto 20px auto;
+    }
+    p {
+      font-size: 1.1rem;
+      margin: 20px auto;
+      line-height: 1.5;
+      max-width: 700px;
+      color: #333;
+      text-align: justify;
+    }
+    .collage {
+      display: inline-block;
+      position: relative;
+    }
+    .collage img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    }
+    /* HOVER TEXT AREA */
+    #desc {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #444;
+      text-align: center;
+      min-height: 40px;
+    }
+    /* COUNTRY SECTION STYLES */
+    .country-section {
+      margin: 40px auto;
+      max-width: 900px;
+      background-color: #fff;
+      border: 3px solid #fff;
+      border-radius: 50px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      /* Increased from 20px to 40px for extra space */
+      padding: 40px;  /* More padding to prevent hover text from exceeding container */
+      position: relative;
+    }
+    .country-section .country-header {
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      background-color: #86b6f6;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-family: "DM Serif", Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    /* Country header hover: bold and dark blue */
+    .country-header:hover {
+      font-weight: bold;
+      color: darkblue;
+    }
+    /* Container holding all the country cards in one row */
+    .country-cards {
+      display: flex;
+      flex-wrap: nowrap;           /* All cards remain on one line */
+      justify-content: space-evenly;/* Evenly distribute space between cards */
+    }
+    /* Each individual country card */
+    .country-card {
+      flex: 1 1 0;                
+      max-width: 220px;           
+      margin: 0 10px;            
+      flex-direction: column;
+      align-items: center;
+      position: relative;         
+    }
+    /* Images within each country card */
+    .country-card a img {
+      width: 100%;                
+      height: 140px;              
+      object-fit: cover;          
+      border-radius: 10px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    }
+    /* Hover caption for each image */
+    .country-card p {
+      display: none;
+      position: absolute;
+      left: 0;
+      width: 100%;                
+      background-color: rgba(255, 255, 255, 0.8);
+      margin: 0;
+      text-align: center;
+      padding: 5px 0;
+      border-radius: 0 0 10px 10px;
+      font-size: 0.9rem;
+      color: #333;
+    }
+    .country-card:hover p {
+      display: block;
+      font-weight: bold;
+      color: darkblue;
+    }
+  </style>
+  <script>
+    // JavaScript functions for hover text on the image map
+    function writeText(txt) {
+      document.getElementById("desc").innerHTML = txt;
+    }
+    function dissolveText() {
+      document.getElementById("desc").innerHTML = "";
+    }
+  </script>
+  <!-- ImageMapResizer script for responsive image maps -->
+  <script src="https://unpkg.com/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
+</head>
+<body>
+  <!-- LOGO -->
+  <div class="logo-img">
+    <img src="MDlogo.jpg" alt="MD Logo">
+  </div>
+  
+  <!-- NAVIGATION -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="biography.html">Biography</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li class="dropdown">
+        <a href="#">More ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="mybeats.html">My Beats</a></li>
+          <li><a href="mykindsoffilm.html">My Kinds of Film</a></li>
+          <li><a href="mydream.html" class="active">Dream Places</a></li>
+          <li><a href="bucketlist.html">Bucket List</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <h1>My Dream Places to Visit</h1>
+    <div class="divider"></div>
+    
+    <p>
+      Here’s a world map showing four countries I dream of exploring. Each country is mapped with a unique shape:
+      <strong>Circle for Japan</strong>, <strong>Square for South Korea</strong>, 
+      <strong>Hexagon for Switzerland</strong>, <strong>Pentagon for Iceland</strong>, and
+      <strong>Rectangle for the Philippines</strong>.
+      Hover over a shape to see a brief description, then click to learn more about why that destination captivates my imagination,
+      how to get there, and what makes it special.
+    </p>
+    
+    <!-- Hover text area -->
+    <p id="desc"></p>
+    
+    <!-- World map with image map -->
+    <div class="collage">
+      <img src="MAPPING/IMAGES/worldmap.jpg" alt="World Map with Flags" usemap="#worldMap" id="worldMapImage">
+      <map name="worldMap" id="worldMapMap">
+        <!-- Japan (Circle): using center (2989,1500) with radius 250 -->
+        <area 
+          shape="circle"
+          coords="2989,1500,250"
+          href="MAPPING/japan.html"
+          alt="Japan"
+          title="Japan"
+          onmouseover="writeText('Japan: Land of the Rising Sun!')"
+          onmouseout="dissolveText()"
+        >
+        <!-- South Korea (Square): using top-left (2632,138) and bottom-right (3162,676) -->
+        <area 
+          shape="rect"
+          coords="2632,138,3162,676"
+          href="MAPPING/southkorea.html"
+          alt="South Korea"
+          title="South Korea"
+          onmouseover="writeText('South Korea: K-pop, Kimchi, and Tech!')"
+          onmouseout="dissolveText()"
+        >
+        <!-- Switzerland (Hexagon): using vertices -->
+        <area 
+          shape="poly"
+          coords="1247,480,1517,634,1517,944,1247,1103,983,944,981,634"
+          href="MAPPING/switzerland.html"
+          alt="Switzerland"
+          title="Switzerland"
+          onmouseover="writeText('Switzerland: Alps, chocolate, and scenic beauty!')"
+          onmouseout="dissolveText()"
+        >
+        <!-- Iceland (Pentagon): using vertices -->
+        <area 
+          shape="poly"
+          coords="2076,192,2362,412,2254,764,1902,764,1787,414"
+          href="MAPPING/iceland.html"
+          alt="Iceland"
+          title="Iceland"
+          onmouseover="writeText('Iceland: Dramatic landscapes and volcanic wonders!')"
+          onmouseout="dissolveText()"
+        >
+        <!-- Philippines (Rectangle): using top-left (1852,912) and bottom-right (2540,1413) -->
+        <area 
+          shape="rect"
+          coords="1852,912,2540,1413"
+          href="MAPPING/philippines.html"
+          alt="Philippines"
+          title="Philippines"
+          onmouseover="writeText('Philippines: 7,600+ islands, beaches, and diverse culture!')"
+          onmouseout="dissolveText()"
+        >
+      </map>
+    </div>
+    
+    <!-- Initialize image map resizer -->
+    <script>
+      window.onload = function() {
+        if (typeof imageMapResize === 'function') {
+          imageMapResize();
+        }
+      };
+    </script>
+    
+    <!-- COUNTRY CARD SECTIONS -->
+    
+    <!-- Japan Section -->
+    <div class="country-section">
+      <div class="country-header">Japan</div>
+      <div class="country-cards">
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/tokyo.jpg" alt="Tokyo"></a>
+          <p>Tokyo</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/kyoto.jpg" alt="Kyoto"></a>
+          <p>Kyoto</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/osaka.jpg" alt="Osaka"></a>
+          <p>Osaka</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/hokkaido.jpg" alt="Hokkaido"></a>
+          <p>Hokkaido</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- South Korea Section -->
+    <div class="country-section">
+      <div class="country-header">South Korea</div>
+      <div class="country-cards">
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/seoul.jpg" alt="Seoul"></a>
+          <p>Seoul</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/busan.jpg" alt="Busan"></a>
+          <p>Busan</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/jeju.jpg" alt="Jeju"></a>
+          <p>Jeju</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/incheon.jpg" alt="Incheon"></a>
+          <p>Incheon</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Switzerland Section -->
+    <div class="country-section">
+      <div class="country-header">Switzerland</div>
+      <div class="country-cards">
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/zurich.jpg" alt="Zurich"></a>
+          <p>Zurich</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/geneva.jpg" alt="Geneva"></a>
+          <p>Geneva</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/lucerne.jpg" alt="Lucerne"></a>
+          <p>Lucerne</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/interlaken.jpg" alt="Interlaken"></a>
+          <p>Interlaken</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Iceland Section -->
+    <div class="country-section">
+      <div class="country-header">Iceland</div>
+      <div class="country-cards">
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/reykjavik.jpg" alt="Reykjavik"></a>
+          <p>Reykjavik</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/goldencircle.jpg" alt="Golden Circle"></a>
+          <p>Golden Circle</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/skaftafell.jpg" alt="Skaftafell"></a>
+          <p>Skaftafell</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/vatnajokull.jpg" alt="Vatnajökull"></a>
+          <p>Vatnajökull</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Philippines Section -->
+    <div class="country-section">
+      <div class="country-header">Philippines</div>
+      <div class="country-cards">
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/palawan.jpg" alt="Palawan"></a>
+          <p>Manila</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/siquijor.jpg" alt="Siquijor"></a>
+          <p>Cebu</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/bukidnon.jpg" alt="Bukidnon"></a>
+          <p>Boracay</p>
+        </div>
+        <div class="country-card">
+          <a><img src="MAPPING/IMAGES/batanes.jpg" alt="Batanes"></a>
+          <p>Palawan</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</body>
+</html>

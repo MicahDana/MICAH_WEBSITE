@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Bucket List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ====== GLOBAL RESET ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* ====== BODY & BACKGROUND ====== */
+    body {
+      font-family: "Trebuchet MS", Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+      min-height: 100vh;
+      padding-top: 100px; /* space for fixed nav */
+      text-align: center;
+    }
+    
+    /* ====== UPDATED LOGO - Circular Logo ====== */
+    .logo-img {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: 80px;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "DM Serif", Georgia, serif;
+      font-size: 1.5rem;
+      color: #0e11a6;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 1000;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* ====== UPDATED NAVIGATION BAR ====== */
+    nav {
+      position: fixed;
+      top: 0;
+      margin-left: 140px; /* space for the logo */
+      width: calc(100% - 140px);
+      padding: 0.5rem 5rem;
+      background-color: #86b6f6;
+      border-bottom-left-radius: 40px;
+      box-shadow: 10px 1px 5px rgba(0,0,0,0.5);
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links li a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links li a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    .nav-links li a.active {
+      background-color: #0e11a6;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #86b6f6;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-content a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .dropdown-content a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    
+    /* ====== CONTAINER FOR MAIN CONTENT ====== */
+    .container {
+      padding-top: 120px; 
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    /* ====== PAGE TITLE & DIVIDER ====== */
+    h1 {
+      font-size: 2.5rem;
+      color: #0e11a6;
+      font-family: "DM Serif", Georgia, serif;
+      margin-bottom: 10px;
+    }
+    .divider {
+      width: 80%;
+      height: 3px;
+      background-color: #86b6f6;
+      margin: 0 auto 20px auto;
+    }
+    
+    /* ====== BUCKET LIST DESCRIPTION ====== */
+    .description {
+      font-size: 1.1rem;
+      color: #333;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.5;
+      text-align: justify;
+    }
+    
+    /* ====== BUCKET LIST CARDS ====== */
+    .bucketlist-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .bucketlist-card {
+      width: 300px;
+      background-color: #fff;
+      border-radius: 30px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      padding: 20px;
+      text-align: left;
+    }
+    .bucketlist-card h2 {
+      font-size: 1.4rem;
+      color: #0e11a6;
+      margin-bottom: 10px;
+    }
+    .bucketlist-card p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    /* Photo placeholder replaced by image */
+    .photo-placeholder {
+      width: 100%;
+      height: 150px;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #ede8f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* ====== BUTTONS ====== */
+    /* Non-fixed Go Top Button */
+    .go-top-button {
+      display: inline-block;
+      background-color: #0e11a6;
+      color: #fff;
+      padding: 0.7rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      margin-top: 30px;
+    }
+    .go-top-button:hover {
+      background-color: #444;
+    }
+    /* Fixed Back to Map Button */
+    .back-to-map a {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background-color: #86b6f6;
+      color: #fff;
+      padding: 0.7rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      z-index: 999;
+    }
+    .back-to-map a:hover {
+      background-color: #0e11a6;
+    }
+  </style>
+</head>
+<body>
+  <!-- Circular MD Logo -->
+  <div class="logo-img">
+    <img src="MDlogo.jpg" alt="MD Logo">
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="biography.html">Biography</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li class="dropdown">
+        <a href="#">More ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="mybeats.html">My Beats</a></li>
+          <li><a href="mykindsoffilm.html">My Kinds of Film</a></li>
+          <li><a href="mydream.html">Dream Places</a></li>
+          <li><a href="bucketlist.html" class="active">Bucket List</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <h1>My Bucket List</h1>
+    <div class="divider"></div>
+    <p class="description">
+      These are some of the items on my bucket list that I want to achieve and experience.
+      Each one represents a dream or a goal I hope to fulfill, whether it's something adventurous, meaningful, or simply fun!
+      I love traveling. There are a lot of places that feel like paradise, which makes me feel amazed all the time.
+    </p>
+    
+    <div class="bucketlist-container">
+      <!-- Card 1: See Northern Lights -->
+      <div class="bucketlist-card">
+        <h2>See Northern lights</h2>
+        <p>
+          I want to be able to see the northern lights soon. I think it's a thrilling experience. (add more details)
+        </p>
+        <div class="photo-placeholder">
+          <img src="bucket1.jpg" alt="Northern Lights">
+        </div>
+      </div>
+      <!-- Card 2: Volunteering -->
+      <div class="bucketlist-card">
+        <h2>Volunteering</h2>
+        <p>
+          I want to be able to volunteer in a local community program. It's a fulfilling experience that helps me connect with others. (add more details)
+        </p>
+        <div class="photo-placeholder">
+          <img src="bucket2.jpg" alt="Volunteering">
+        </div>
+      </div>
+      <!-- Card 3: Freediving -->
+      <div class="bucketlist-card">
+        <h2>Freediving</h2>
+        <p>
+          I dream of exploring the underwater world while freediving. The idea of experiencing the ocean's beauty up close is incredibly exciting.
+        </p>
+        <div class="photo-placeholder">
+          <img src="bucket3.jpg" alt="Freediving">
+        </div>
+      </div>
+      <!-- Card 4: Skydiving -->
+      <div class="bucketlist-card">
+        <h2>Skydiving</h2>
+        <p>
+          I want to experience the ultimate adrenaline rush by skydiving. The thrill of freefalling and the breathtaking views from above are dreams I hope to make come true.
+        </p>
+        <div class="photo-placeholder">
+          <img src="bucket4.jpg" alt="Skydiving">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Non-fixed Go Top Button -->
+    <a href="javascript:void(0)" class="go-top-button" onclick="scrollToTop()">Go Top</a>
+  </div> <!-- end of container -->
+
+  <!-- Fixed Back to Map Button -->
+  <div class="back-to-map">
+    <a href="mydream.html">Back to Map</a>
+  </div>
+
+  <!-- SMOOTH SCROLL SCRIPT -->
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ 
+        top: 0, 
+        behavior: 'smooth' 
+      });
+    }
+  </script>
+</body>
+</html>

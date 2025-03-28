@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Micah Dana Aquino - Gallery</title>
+  <style>
+    /* GLOBAL RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* BODY & BACKGROUND */
+    body {
+      font-family: "Trebuchet MS", Verdana, Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+      min-height: 100vh;
+      padding-top: 100px;
+      text-align: center;
+    }
+    #top {
+      scroll-margin-top: 120px;
+    }
+    
+    /* LOGO - Updated circular logo */
+    .logo-img {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: 80px;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "DM Serif", Georgia, serif;
+      font-size: 1.5rem;
+      color: #0e11a6;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 1000;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* NAVIGATION BAR (Updated) */
+    nav {
+      position: fixed;
+      top: 0;
+      margin-left: 140px; /* space for the logo */
+      width: calc(100% - 140px);
+      padding: 0.5rem 5rem;
+      background-color: #86b6f6;
+      border-bottom-left-radius: 40px;
+      box-shadow: 10px 1px 5px rgba(0,0,0,0.5);
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links li a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links li a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    .nav-links li a.active {
+      background-color: #0e11a6;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #86b6f6;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-content a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .dropdown-content a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    
+    /* PAGE TITLE & DIVIDER */
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0e11a6;
+      text-shadow: 2px 2px 8px gray;
+      font-family: "EB Garamond", Georgia, "DM Serif", serif;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .divider {
+      height: 3px;
+      background-color: #86b6f6;
+      margin: 20px auto;
+      width: 80%;
+    }
+    
+    /* GALLERY GRID */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      padding: 20px;
+      justify-items: center;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-item a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    .gallery-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border: 2px solid #fff;
+      border-radius: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #0e11a6;
+    }
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(14, 17, 166, 0.8);
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 5px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <!-- Circular MD Logo -->
+  <div class="logo-img">
+    <img src="MDlogo.jpg" alt="MD Logo">
+  </div>
+  
+  <!-- Navigation Bar -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="biography.html">Biography</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li class="dropdown">
+        <a href="#">More ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="mybeats.html">My Beats</a></li>
+          <li><a href="mykindsoffilm.html">My Kinds of Film</a></li>
+          <li><a href="mydream.html">Dream Places</a></li>
+          <li><a href="bucketlist.html">Bucket List</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <h1>Photo Gallery Dump</h1>
+  <div class="divider"></div>
+  
+  <!-- Gallery Grid with 5 items per row, images open in one tab named galleryTab -->
+  <div class="gallery">
+    <div class="gallery-item">
+      <a href="gallery1.jpg" target="galleryTab">
+        <img src="gallery1.jpg" alt="Gallery Image 1">
+        <div class="overlay">Sitting Smiling</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery2.jpg" target="galleryTab">
+        <img src="gallery2.jpg" alt="Gallery Image 2">
+        <div class="overlay">Fierce</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery3.jpg" target="galleryTab">
+        <img src="gallery3.jpg" alt="Gallery Image 3">
+        <div class="overlay">Smiling</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery4.jpg" target="galleryTab">
+        <img src="gallery4.jpg" alt="Gallery Image 4">
+        <div class="overlay">Serious</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery5.jpg" target="galleryTab">
+        <img src="gallery5.jpg" alt="Gallery Image 5">
+        <div class="overlay">Non-chalant</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery6.jpg" target="galleryTab">
+        <img src="gallery6.jpg" alt="Gallery Image 6">
+        <div class="overlay">Matcha & Honeydew</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery7.jpg" target="galleryTab">
+        <img src="gallery7.jpg" alt="Gallery Image 7">
+        <div class="overlay">Jannah's Celeb</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery8.jpg" target="galleryTab">
+        <img src="gallery8.jpg" alt="Gallery Image 8">
+        <div class="overlay">Comssolympics</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery9.jpg" target="galleryTab">
+        <img src="gallery9.jpg" alt="Gallery Image 9">
+        <div class="overlay">Starbucks</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery10.jpg" target="galleryTab">
+        <img src="gallery10.jpg" alt="Gallery Image 10">
+        <div class="overlay">Lunch</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery11.jpg" target="galleryTab">
+        <img src="gallery11.jpg" alt="Gallery Image 11">
+        <div class="overlay">Straight Hair</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery12.jpg" target="galleryTab">
+        <img src="gallery12.jpg" alt="Gallery Image 12">
+        <div class="overlay">Chicken Fillet</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery13.jpg" target="galleryTab">
+        <img src="gallery13.jpg" alt="Gallery Image 13">
+        <div class="overlay">20th</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery14.jpg" target="galleryTab">
+        <img src="gallery14.jpg" alt="Gallery Image 14">
+        <div class="overlay">Birthday</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery15.jpg" target="galleryTab">
+        <img src="gallery15.jpg" alt="Gallery Image 15">
+        <div class="overlay">Celebration</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery16.jpg" target="galleryTab">
+        <img src="gallery16.jpg" alt="Gallery Image 16">
+        <div class="overlay">Sunset</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery17.jpg" target="galleryTab">
+        <img src="gallery17.jpg" alt="Gallery Image 17">
+        <div class="overlay">Beach</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery18.jpg" target="galleryTab">
+        <img src="gallery18.jpg" alt="Gallery Image 18">
+        <div class="overlay">Library</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery19.jpg" target="galleryTab">
+        <img src="gallery19.jpg" alt="Gallery Image 19">
+        <div class="overlay">Barkday</div>
+      </a>
+    </div>
+    <div class="gallery-item">
+      <a href="gallery20.jpg" target="galleryTab">
+        <img src="gallery20.jpg" alt="Gallery Image 20">
+        <div class="overlay">Good Girl</div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

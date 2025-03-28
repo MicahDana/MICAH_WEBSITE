@@ -1,0 +1,236 @@
+/* GLOBAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* REMOVE BULLETS FOR ALL UL */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+  background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+  color: #1a1a1a;
+  min-height: 100vh;
+}
+
+/* LOGO */
+.logo-img {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 80px;
+  height: auto;
+  z-index: 1000;
+  background-color: #ccc;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "DM Serif", Georgia, serif;
+  font-size: 1.5rem;
+  color: #0e11a6;
+  border-radius: 5px;
+}
+
+/* NAVIGATION */
+nav {
+  max-width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 1.5rem 5rem;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  background-color: #86b6f6;
+  border-bottom-left-radius: 40px;
+  box-shadow: 10px 1px 5px rgb(0, 0, 0);
+  flex-wrap: wrap;
+  z-index: 900;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  font-family: Verdana, sans-serif;
+  display: block;
+  padding: 0.8rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links a:hover {
+  background-color: #0e11a6;
+  color: #fff;
+}
+
+.nav-links a.active {
+  background-color: #0e11a6;
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 100%; /* directly below the parent */
+  left: 0;
+  background-color: #86b6f6;
+  min-width: 160px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-content a {
+  font-family: Verdana, sans-serif;
+  display: block;
+  padding: 0.6rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.dropdown-content a:hover {
+  background-color: #0e11a6;
+  color: #fff;
+}
+
+/* HERO SECTION */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8rem 10%;
+  margin-top: 8rem;
+  min-height: calc(100vh - 8rem);
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h2 {
+  font-size: 1.4rem;
+  color: #0e11a6;
+  margin-bottom: 0.3rem;
+  font-weight: normal;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+  color: #0e11a6;
+  margin-bottom: 1rem;
+  font-family: "DM Serif", Georgia, serif;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+
+.know-more {
+  display: inline-block;
+  background-color: #0e11a6;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+
+.know-more:hover {
+  background-color: #bfd4ff;
+  color: #0e11a6;
+}
+
+.video-placeholder {
+  width: 300px;
+  height: 200px;
+  background-color: #ede8f5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #666;
+  font-size: 1.2rem;
+  font-family: "Trebuchet MS", Tahoma, sans-serif;
+}
+
+/* SOCIAL ICONS */
+.social-icons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.social-icons a {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
+
+.social-icons .fb {
+  background-color: #1877f2;
+}
+.social-icons .fb:hover {
+  background-color: #0e52ad;
+}
+.social-icons .msgr {
+  background-color: #00b2ff;
+}
+.social-icons .msgr:hover {
+  background-color: #0082c4;
+}
+.social-icons .ig {
+  background-color: #c32aa3;
+}
+.social-icons .ig:hover {
+  background-color: #8c1f78;
+}

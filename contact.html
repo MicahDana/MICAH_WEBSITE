@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contact - Micah Dana</title>
+  <!-- Font Awesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pap2vNQa+...your-integrity-hash..."
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    /* GLOBAL RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* NAVIGATION (Same as Gallery page) */
+    nav {
+      position: fixed;
+      top: 0;
+      margin-left: 140px; /* space for the logo */
+      width: calc(100% - 140px);
+      padding: 0.5rem 5rem;
+      background-color: #86b6f6;
+      border-bottom-left-radius: 40px;
+      box-shadow: 10px 1px 5px rgba(0,0,0,0.5);
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      list-style: none;
+    }
+    .nav-links li a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .nav-links li a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    .nav-links li a.active {
+      background-color: #0e11a6;
+      color: #fff;
+      text-decoration: underline;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #86b6f6;
+      min-width: 160px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+    }
+    .dropdown-content li {
+      list-style: none; /* Remove bullets in dropdown */
+      margin: 0;
+      padding: 0;
+    }
+    .dropdown-content a {
+      font-family: Verdana, sans-serif;
+      display: block;
+      padding: 0.6rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    .dropdown-content a:hover {
+      background-color: #0e11a6;
+      color: #fff;
+    }
+    
+    /* Circular Logo (Same as Gallery page) */
+    .logo-img {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: 80px;
+      z-index: 1000;
+      border-radius: 50%;
+      overflow: hidden;
+      background: transparent;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* CONTACT PAGE STYLES */
+    body {
+      font-family: "Trebuchet MS", Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #bfd4ff, #ede8f5);
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding-top: 100px; /* space for fixed nav */
+    }
+
+    /* Container for the contact columns */
+    .contact-container {
+      display: flex;
+      align-items: center;        /* vertically center */
+      justify-content: center;    /* center horizontally */
+      gap: 50px;                  /* space between columns */
+      max-width: 900px;          /* narrower container to bring them closer */
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Left column */
+    .contact-left {
+      max-width: 400px;
+    }
+    .contact-left h1 {
+      font-family: "DM Serif", Georgia, serif;
+      font-size: 3rem;
+      color: #0e11a6;
+      margin-bottom: 20px;
+    }
+    .contact-info {
+      font-size: 1.2rem;
+      line-height: 2;
+      color: #0e11a6;
+    }
+    .contact-info .icon-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .contact-info .icon-label i {
+      font-size: 1.2rem;
+    }
+
+    /* Right column */
+    .contact-right img {
+      width: 300px;       /* square dimension */
+      height: 300px;      /* square dimension */
+      object-fit: cover;  /* crops image if needed */
+      border-radius: 10px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Reach out text at the bottom */
+    .reach-out {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #0e11a6;
+      margin: 40px auto 60px;
+      max-width: 800px;
+      line-height: 1.5;
+    }
+    .reach-out span {
+      display: block;
+      margin-top: 10px;
+      color: #444;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Circular MD Logo -->
+  <div class="logo-img">
+    <img src="MDlogo.jpg" alt="MD Logo">
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="biography.html">Biography</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li class="dropdown">
+        <a href="#">More ▼</a>
+        <ul class="dropdown-content">
+          <li><a href="mybeats.html">My Beats</a></li>
+          <li><a href="mykindsoffilm.html">My Kind of Film</a></li>
+          <li><a href="mydream.html">Dream Places</a></li>
+          <li><a href="bucketlist.html">Bucket List</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTACT CONTENT -->
+  <div class="contact-container">
+    <!-- LEFT COLUMN -->
+    <div class="contact-left">
+      <h1>Contact</h1>
+      <div class="contact-info">
+        <!-- Phone -->
+        <div class="icon-label">
+          <i class="fa-solid fa-phone"></i>
+          <span>+1 (234) 567-8901</span>
+        </div>
+        <!-- Email -->
+        <div class="icon-label">
+          <i class="fa-solid fa-envelope"></i>
+          <span>email@micahdana.com</span>
+        </div>
+        <!-- Address -->
+        <div class="icon-label">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>123 Main St, City, Country</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="contact-right">
+      <img src="MICAH2.jpg" alt="Micah's Contact Image">
+    </div>
+  </div>
+
+  <!-- REACH OUT TEXT -->
+  <p class="reach-out">
+    I’d love to hear from you! Whether you have a question, a project idea, or just want to say hello, feel free to drop me a message or connect with me on social media.
+    <span>(I check my inbox regularly, so I’ll get back to you as soon as I can.)</span>
+  </p>
+</body>
+</html>
